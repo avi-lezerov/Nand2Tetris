@@ -16,10 +16,6 @@ class SymbolTable:
         self.__table["ARG"] = 2
         self.__table["THIS"] = 3
         self.__table["THAT"] = 4
-       
-            
-
-
 
     def add_entry(self, symbol : str, address : int):
         """
@@ -29,7 +25,7 @@ class SymbolTable:
             symbol (str): The symbol.
             address (int): The address.
         """
-        pass
+        self.__table[symbol] = address
 
     def contains(self, symbol : str) -> bool:
         """
@@ -52,10 +48,9 @@ class SymbolTable:
             symbol (str): The symbol.
 
         Returns:
-            int: The address associated with the symbol.
+            str: The address in binary in length of 16 bits.
         """
         if  self.contains(symbol):
-            return self.__table.get(symbol)
+            return "0" + format(self.__table.get(symbol), "015b")
 
-    def get(self):
-        return self.__table
+        

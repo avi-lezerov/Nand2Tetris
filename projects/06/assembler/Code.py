@@ -21,7 +21,7 @@ def comp(cmp : str):
     Returns:
         str: The binary code of the comp mnemonic 7 bits as string.
     """
-    return _comp[cmp]
+    return __comp[cmp]
 
 
 def jump(jmp : str):
@@ -39,7 +39,7 @@ def jump(jmp : str):
 
 
 __dest = {
-    "null" : "000",
+    None : "000",
     "M" : "001",
     "D" : "010",
     "MD" : "011",
@@ -50,7 +50,7 @@ __dest = {
 }
 
 __jump = {
-    "null" : "000",
+    None : "000",
     "JGT" : "001",
     "JEQ" : "010",
     "JGE" : "011",
@@ -60,7 +60,7 @@ __jump = {
     "JMP" : "111"
 }
 
-_comp = {
+__comp = {
     "0" : "0101010",
     "1" : "0111111",
     "-1" : "0111010",
