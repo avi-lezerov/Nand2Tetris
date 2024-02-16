@@ -1,0 +1,45 @@
+#!/bin/sh
+# This file only works on Unix-like operating systems, so it won't work on Windows.
+
+## Why do we need this file?
+# The purpose of this file is to run your project.
+# We want our users to have a simple API to run the project. 
+# So, we need a "wrapper" that will hide all  details to do so,
+# enabling users to simply type 'Assembler <path>' in order to use it.
+
+## What are '#!/bin/sh' and '$*'?
+# '$*' is a variable that holds all the arguments this file has received. So, if you
+# run "Assembler trout mask replica", $* will hold "trout mask replica".
+
+## What should I change in this file to make it work with my project?
+# IMPORTANT: This file assumes that the main is contained in "Main.py".
+#            If your main is contained elsewhere, you will need to change this.
+
+# Check if an argument is provided
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <path>"
+    exit 1
+fi
+
+# Check if the provided path exists
+if [ ! -e "$1" ]; then
+    echo "Error: Path '$1' does not exist."
+    exit 1
+fi
+
+# Check if the provided path is a file or directory
+if [ -f "$1" ]; then
+    # If the path is a file, directly execute the Python script with the file path
+    python3 Main.py "$1"
+elif [ -d "$1" ]; then
+    # If the path is a directory, iterate over .asm files and execute the Python script for each
+    for file in "$1"/*.asm; do
+    # if the file is an assembly file, then run the assembler
+    if [ "${file##*.}" = "asm" ]; then
+        python3 Main.py "$file" "$output_file"
+    fi
+    done
+else
+    echo "Error: Invalid path '$1'."
+    exit 1
+fi
