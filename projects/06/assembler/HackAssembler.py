@@ -15,12 +15,12 @@ class HackAssembler:
         Args:
             file (str): The name of the input file.
         """
+        self.path = path
         temp = os.path.splitext(path)[0] + ".hack"
         directory = os.path.dirname(path)
         new_path = os.path.join(directory, temp)
+    
         
-        
-        self.path = path
         self._symbol_table = SymbolTable()
         self._address = 16
         self._output_file = open(new_path , "w")
