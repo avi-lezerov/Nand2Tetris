@@ -50,7 +50,7 @@ class Parser:
         
     
     def arg1(self) -> str:
-        if self.command[0] == "C_ARITHMETIC":
+        if self.command[0] == "C_ARITHMETIC" or self.command[0] == "C_BOOL":
             return self.command[1]
         else:
             return self.command[2]
@@ -58,7 +58,7 @@ class Parser:
 
     def arg2(self) -> int:
         if self.command[0] == "C_PUSH" or self.command[0] == "C_POP" or self.command[0] == "C_FUNCTION" or self.command[0] == "C_CALL":
-            return int(self.command[3])
+            return self.command[3]
         
 
             
@@ -71,12 +71,12 @@ class Parser:
                 "add" : "C_ARITHMETIC",
                 "sub" : "C_ARITHMETIC",
                 "neg" : "C_ARITHMETIC",
-                "eq" : "C_ARITHMETIC",
-                "gt" : "C_ARITHMETIC",
-                "lt" : "C_ARITHMETIC",
                 "and" : "C_ARITHMETIC",
                 "or" : "C_ARITHMETIC",
                 "not" : "C_ARITHMETIC",
+                "eq" : "C_BOOL",
+                "gt" : "C_BOOL",
+                "lt" : "C_BOOL",
                 "goto" : "C_GOTO",
                 "if-goto" : "C_IF",
                 "function" : "C_FUNCTION",
