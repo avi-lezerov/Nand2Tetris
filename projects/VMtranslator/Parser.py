@@ -17,7 +17,8 @@ class Parser:
         self.command = "None"
         self.dic= self.dictionary()
         
-        
+ 
+
     def _close_file(self):
             """
             Closes the input file.
