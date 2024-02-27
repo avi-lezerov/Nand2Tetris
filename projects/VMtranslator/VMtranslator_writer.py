@@ -1,28 +1,23 @@
 import os
-import sys
 from Parser import Parser
 from translator import Translator
 
 class VMtranslator:
 
-    def __init__(self, path):
-       
-        self.path = path
-        temp = os.path.splitext(path)[0] + ".asm"
-        directory = os.path.dirname(path)
-        new_path = os.path.join(directory, temp)
-        self._output_file = open(new_path , "w")
+    def __init__(self, path : str): 
+        path  = path.replace(".vm", ".asm" )
+        self._output_file = open(path , "w")
 
         
 
-    def prosses_file(self):
+    def prosses_file(self, path):
         """
         Processes the file and writes the output to the output file.
         """
         command_type = ""
         asm_list = []
-        parser = Parser(self.path)
-        asm_coder = Translator(os.path.basename(self.path)[:-3])
+        parser = Parser(path)
+        asm_coder = Translator(os.path.basename(path)[:-3])
         while  parser.advance():
             self._output_file.write('// '+ parser.line)
             command_type = parser.command_type()
