@@ -26,13 +26,14 @@ def process_directory(directory):
     vm_files = [f for f in files if f.endswith(".vm")]
     for file in vm_files:
         VMtr.prosses_file(os.path.join(directory, file))
+    VMtr.close_file()
         
 
 def process_single_file(path):
     file_path = os.path.abspath(path)  # Normalize the path to absolute
     VMtr = VMtranslator(file_path)
     VMtr.prosses_file(file_path)
-
+    VMtr.close_file()
 
 if __name__ == "__main__":
     main()
